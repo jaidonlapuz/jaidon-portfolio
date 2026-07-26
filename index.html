@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaidon Lapuz | Public Health Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF7EC;
+    --paper:#FFFFFF;
+    --ink:#2E241C;
+    --ink-soft:#5B4E42;
+    --coral:#FF6B54;
+    --coral-deep:#E5502F;
+    --teal:#0FA98F;
+    --teal-deep:#0C8672;
+    --sunny:#FFC53D;
+    --berry:#F0508C;
+    --sky:#3FA6E0;
+    --line:#F1E3D2;
+    --font-display:'Fredoka', sans-serif;
+    --font-body:'Nunito', sans-serif;
+    --radius:26px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+  body{
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  ul{list-style:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 32px; position:relative;}
+  h1,h2,h3,h4{font-family:var(--font-display); color:var(--ink); line-height:1.14; font-weight:600;}
+  section{padding:104px 0; position:relative;}
+  .eyebrow{
+    font-family:var(--font-display); font-weight:600; font-size:14px; letter-spacing:.03em;
+    color:var(--coral-deep); display:inline-flex; align-items:center; gap:9px; margin-bottom:16px;
+    background:#FFE3DA; padding:7px 16px 7px 12px; border-radius:999px;
+  }
+  .eyebrow .dot{width:9px; height:9px; border-radius:50%; background:var(--coral); flex-shrink:0;}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    font-family:var(--font-display); font-weight:600; font-size:16px; padding:15px 30px; border-radius:999px;
+    border:2.5px solid var(--ink); cursor:pointer; display:inline-flex; align-items:center; gap:9px;
+    transition:transform .15s ease, box-shadow .15s ease; text-decoration:none; position:relative;
+  }
+  .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:3px solid var(--sky); outline-offset:3px;
+  }
+  .btn-primary{background:var(--coral); color:#fff; border-color:var(--ink); box-shadow:5px 5px 0 var(--ink);}
+  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink);}
+  .btn-primary:active{transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink);}
+  .btn-ghost{background:#fff; color:var(--ink); box-shadow:5px 5px 0 var(--teal);}
+  .btn-ghost:hover{transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--teal);}
+  .btn-ghost:active{transform:translate(2px,2px); box-shadow:2px 2px 0 var(--teal);}
+  .btn-outline-light{background:transparent; color:#fff; border-color:#fff; box-shadow:5px 5px 0 rgba(255,255,255,.4);}
+  .btn-outline-light:hover{transform:translate(-2px,-2px); background:#fff; color:var(--ink); box-shadow:7px 7px 0 rgba(255,255,255,.5);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,247,236,.9); backdrop-filter:blur(10px);
+    border-bottom:3px solid var(--ink);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 32px; max-width:1160px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:11px; font-family:var(--font-display); font-weight:600; font-size:17px; color:var(--ink); text-decoration:none;}
+  .brand .blob{
+    width:38px; height:38px; border-radius:60% 40% 55% 45% / 45% 55% 45% 55%;
+    background:var(--coral); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:16px; font-weight:700; flex-shrink:0; border:2px solid var(--ink);
+  }
+  .brand small{display:block; font-family:var(--font-body); font-weight:600; font-size:11.5px; color:var(--ink-soft);}
+  .nav-links{display:flex; gap:4px; align-items:center;}
+  .nav-links a{
+    font-family:var(--font-display); font-size:14.5px; font-weight:500; color:var(--ink-soft); text-decoration:none;
+    padding:9px 15px; border-radius:999px; transition:color .15s ease, background .15s ease;
+  }
+  .nav-links a:hover{color:var(--ink); background:#FFE9DC;}
+  .nav-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .nav-toggle span{display:block; width:24px; height:3px; background:var(--ink); margin:5px 0; border-radius:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden; padding:170px 0 140px; background:var(--cream);
+  }
+  .confetti{position:absolute; inset:0; pointer-events:none; z-index:0;}
+  .confetti span{position:absolute; border-radius:50%; opacity:.55;}
+  .hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.2fr .9fr; gap:56px; align-items:center;}
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:9px; font-family:var(--font-display); font-size:13.5px;
+    font-weight:600; color:var(--teal-deep); background:#D9F6EF; border:2px solid var(--teal);
+    padding:8px 16px; border-radius:999px; margin-bottom:26px;
+  }
+  .hero h1{font-size:clamp(42px, 5.6vw, 70px); font-weight:700; color:var(--ink); margin-bottom:16px;}
+  .hero h1 .wavy{position:relative; color:var(--coral-deep); white-space:nowrap;}
+  .hero .headline{font-size:clamp(19px,2vw,23px); font-weight:600; color:var(--teal-deep); margin-bottom:12px; font-family:var(--font-display);}
+  .hero .sub{font-size:16.5px; color:var(--ink-soft); max-width:520px; margin-bottom:38px; font-weight:500;}
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
+  .headshot-wrap{position:relative; justify-self:center; width:100%; max-width:330px;}
+  .headshot{
+    aspect-ratio:4/5; border-radius:58% 42% 63% 37% / 45% 55% 45% 55%;
+    background:linear-gradient(150deg,#FFC53D,#FF6B54 55%,#F0508C);
+    display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+    border:3px solid var(--ink); box-shadow:10px 10px 0 var(--ink);
+  }
+  .headshot-initials{font-family:var(--font-display); font-weight:700; font-size:86px; color:#fff; z-index:1;}
+  .headshot-caption{position:absolute; bottom:14px; left:14px; right:14px; font-family:var(--font-body); font-size:11px; font-weight:700; color:rgba(255,255,255,.9); z-index:1; text-align:center;}
+  .badge-float{
+    position:absolute; background:#fff; color:var(--ink); padding:11px 17px; border-radius:999px;
+    border:2.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); font-size:13px; font-weight:700;
+    display:flex; align-items:center; gap:8px; font-family:var(--font-display);
+  }
+  .badge-float.b1{top:-18px; right:-22px; transform:rotate(6deg); background:var(--sunny);}
+  .badge-float.b2{bottom:-18px; left:-24px; transform:rotate(-5deg); background:var(--teal); color:#fff;}
+
+  /* wave divider */
+  .wave-divider{display:block; width:100%; height:60px; margin-top:-1px;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head h2{font-size:clamp(30px,3.6vw,42px); margin-bottom:14px;}
+  .section-head p{color:var(--ink-soft); font-size:16.5px; font-weight:500;}
+
+  /* ---------- ABOUT ---------- */
+  #about{background:var(--paper);}
+  .about-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:64px; align-items:start;}
+  .about-grid p{color:var(--ink-soft); margin-bottom:18px; font-size:16.5px; font-weight:500;}
+  .philosophy{
+    background:#FFF3E4; border:3px solid var(--ink); box-shadow:6px 6px 0 var(--sunny);
+    padding:26px 28px; border-radius:22px; margin:28px 0;
+  }
+  .philosophy h4{font-size:14px; color:var(--coral-deep); margin-bottom:10px; font-family:var(--font-display); font-weight:600;}
+  .philosophy p{color:var(--ink); font-size:15.5px; margin:0; font-weight:500;}
+  .values{display:flex; flex-direction:column; gap:16px;}
+  .value-card{
+    background:#fff; border:3px solid var(--ink); border-radius:20px; padding:20px 22px;
+    display:flex; gap:16px; align-items:flex-start; transition:transform .18s ease, box-shadow .18s ease;
+    box-shadow:5px 5px 0 var(--line);
+  }
+  .value-card:nth-child(1){box-shadow:5px 5px 0 var(--coral);}
+  .value-card:nth-child(2){box-shadow:5px 5px 0 var(--teal);}
+  .value-card:nth-child(3){box-shadow:5px 5px 0 var(--sunny);}
+  .value-card:hover{transform:translate(-3px,-3px);}
+  .value-card:nth-child(1):hover{box-shadow:8px 8px 0 var(--coral);}
+  .value-card:nth-child(2):hover{box-shadow:8px 8px 0 var(--teal);}
+  .value-card:nth-child(3):hover{box-shadow:8px 8px 0 var(--sunny);}
+  .value-num{
+    font-family:var(--font-display); font-size:15px; color:#fff; font-weight:700; flex-shrink:0;
+    width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+  .value-card:nth-child(1) .value-num{background:var(--coral);}
+  .value-card:nth-child(2) .value-num{background:var(--teal);}
+  .value-card:nth-child(3) .value-num{background:var(--sunny); color:var(--ink);}
+  .value-card h4{font-size:16px; margin-bottom:5px; color:var(--ink);}
+  .value-card p{color:var(--ink-soft); font-size:14px; margin:0; font-weight:500;}
+
+  /* ---------- ELEVATOR SPEECH ---------- */
+  #speech{background:var(--teal); color:#fff; position:relative; overflow:hidden;}
+  #speech .eyebrow{background:rgba(255,255,255,.18); color:#fff;}
+  #speech .eyebrow .dot{background:#fff;}
+  #speech .section-head h2{color:#fff;}
+  #speech .section-head p{color:#E3FBF5;}
+  .player{
+    background:rgba(255,255,255,.14); border:3px solid rgba(255,255,255,.5); border-radius:24px;
+    padding:26px 28px; display:flex; align-items:center; gap:22px; margin-bottom:34px;
+  }
+  .play-btn{
+    width:58px; height:58px; border-radius:50%; background:var(--coral); border:3px solid var(--ink); cursor:pointer; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; color:#fff; transition:transform .15s ease;
+    box-shadow:4px 4px 0 rgba(0,0,0,.25);
+  }
+  .play-btn:hover{transform:scale(1.07) rotate(-4deg);}
+  .waveform{flex:1; display:flex; align-items:center; gap:3px; height:40px; overflow:hidden;}
+  .waveform span{flex:1; background:rgba(255,255,255,.4); border-radius:3px; min-width:2px; transition:background .2s ease;}
+  .player.playing .waveform span{background:var(--sunny);}
+  .player-time{font-family:var(--font-display); font-size:13px; font-weight:600; color:#fff; flex-shrink:0;}
+  .transcript-toggle{
+    background:#fff; border:2.5px solid var(--ink); color:var(--ink); padding:11px 20px; border-radius:999px;
+    font-family:var(--font-display); font-size:14.5px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .transcript-toggle:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink);}
+  .transcript{max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s ease, margin .3s ease; opacity:0;}
+  .transcript.open{max-height:600px; opacity:1; margin-top:24px;}
+  .transcript blockquote{
+    background:rgba(255,255,255,.12); border-left:5px solid var(--sunny); border-radius:0 18px 18px 0;
+    padding:22px 26px; color:#fff; font-size:16px; font-weight:500; line-height:1.75;
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  #experience{background:var(--paper);}
+  .exp-card{background:#FFF7EC; border:3px solid var(--ink); border-radius:26px; padding:40px; position:relative; box-shadow:8px 8px 0 var(--coral);}
+  .exp-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:28px; padding-bottom:24px; border-bottom:2.5px dashed var(--ink);}
+  .exp-org h3{font-size:23px; margin-bottom:6px;}
+  .exp-role{color:var(--teal-deep); font-weight:700; font-size:15px; font-family:var(--font-display);}
+  .exp-meta{font-family:var(--font-display); font-weight:600; font-size:13.5px; color:var(--ink-soft); text-align:right;}
+  .route-list{position:relative; padding-left:8px;}
+  .route-line{position:absolute; left:17px; top:8px; bottom:8px; width:3px; background-image:linear-gradient(var(--ink) 55%, transparent 45%); background-size:3px 12px; background-repeat:repeat-y; opacity:.3;}
+  .route-item{display:flex; gap:20px; position:relative; padding-bottom:26px;}
+  .route-item:last-child{padding-bottom:0;}
+  .route-marker{
+    width:36px; height:36px; border-radius:50%; flex-shrink:0; border:2.5px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:13px; font-weight:700;
+    color:#fff; z-index:1;
+  }
+  .route-item:nth-child(2) .route-marker{background:var(--coral);}
+  .route-item:nth-child(3) .route-marker{background:var(--sunny); color:var(--ink);}
+  .route-item:nth-child(4) .route-marker{background:var(--teal);}
+  .route-item:nth-child(5) .route-marker{background:var(--berry);}
+  .route-item:nth-child(6) .route-marker{background:var(--sky);}
+  .route-item p{color:var(--ink-soft); font-size:15.5px; padding-top:6px; font-weight:500;}
+  .route-item strong{color:var(--ink); font-family:var(--font-display); font-weight:600;}
+
+  /* ---------- ARTIFACTS ---------- */
+  #artifacts{background:#FFF3E4;}
+  .filter-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px;}
+  .filter-chip{
+    font-family:var(--font-display); font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:999px;
+    border:2.5px solid var(--ink); background:#fff; color:var(--ink); cursor:pointer; transition:all .15s ease;
+  }
+  .filter-chip:hover{transform:translateY(-2px);}
+  .filter-chip.active{background:var(--ink); border-color:var(--ink); color:#fff;}
+  .artifact-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+  .artifact-card{
+    background:#fff; border:3px solid var(--ink); border-radius:24px; padding:26px; display:flex; flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease; cursor:pointer; box-shadow:6px 6px 0 var(--card-color, var(--teal));
+  }
+  .artifact-card:hover{transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--card-color, var(--teal));}
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;}
+  .domain-badge{
+    font-family:var(--font-display); font-size:11.5px; font-weight:600; letter-spacing:.02em;
+    background:var(--card-color, var(--teal)); color:#fff; padding:7px 13px; border-radius:999px;
+  }
+  .card-domain-num{font-family:var(--font-display); font-size:28px; font-weight:700; color:var(--line);}
+  .artifact-card h3{font-size:17.5px; margin-bottom:10px; line-height:1.35;}
+  .artifact-card .desc{color:var(--ink-soft); font-size:14px; margin-bottom:20px; flex:1; font-weight:500;}
+  .card-actions{display:flex; gap:10px; align-items:center; padding-top:16px; border-top:2px dashed var(--line);}
+  .link-btn{
+    font-family:var(--font-display); font-size:13.5px; font-weight:600; color:var(--card-color, var(--teal-deep));
+    background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:6px; padding:0;
+  }
+  .link-btn:hover{opacity:.7;}
+  .link-btn.pdf{color:var(--ink-soft); margin-left:auto;}
+
+  /* ---------- MODAL ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(46,36,28,.55); backdrop-filter:blur(3px); z-index:200;
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  .modal-backdrop.open{display:flex;}
+  .modal{
+    background:#fff; border-radius:28px; max-width:560px; width:100%; max-height:84vh; overflow-y:auto;
+    padding:36px; position:relative; border:3px solid var(--ink); box-shadow:10px 10px 0 rgba(46,36,28,.25);
+  }
+  .modal-close{
+    position:absolute; top:20px; right:20px; width:38px; height:38px; border-radius:50%; border:2.5px solid var(--ink);
+    background:#fff; cursor:pointer; font-size:16px; color:var(--ink); display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{background:var(--cream);}
+  .modal .domain-badge{margin-bottom:16px;}
+  .modal h3{font-size:23px; margin-bottom:14px;}
+  .modal .desc{color:var(--ink-soft); font-size:15px; margin-bottom:22px; font-weight:500;}
+  .modal .reflection-box{background:var(--cream); border-left:5px solid var(--card-color, var(--teal)); padding:20px 22px; border-radius:0 16px 16px 0;}
+  .modal .reflection-box h4{font-family:var(--font-display); font-size:12.5px; letter-spacing:.03em; color:var(--card-color, var(--teal-deep)); margin-bottom:8px; font-weight:600;}
+  .modal .reflection-box p{font-weight:500; color:var(--ink); font-size:15px; margin:0;}
+  .modal-actions{margin-top:26px; display:flex; gap:12px;}
+
+  /* ---------- RESUME ---------- */
+  #resume{background:var(--paper);}
+  .resume-doc{
+    background:#FFF7EC; border:3px solid var(--ink); border-radius:26px; padding:48px; box-shadow:8px 8px 0 var(--sunny);
+  }
+  .resume-head{text-align:center; border-bottom:3px dashed var(--ink); padding-bottom:20px; margin-bottom:26px;}
+  .resume-head h3{font-size:25px; margin-bottom:6px;}
+  .resume-head p{color:var(--ink-soft); font-size:14px; font-weight:600;}
+  .resume-section{margin-bottom:24px;}
+  .resume-section h4{
+    font-family:var(--font-display); font-size:13px; letter-spacing:.02em; color:var(--coral-deep);
+    margin-bottom:12px; font-weight:600;
+  }
+  .resume-row{display:flex; justify-content:space-between; gap:16px; margin-bottom:10px; font-size:14.5px;}
+  .resume-row .r-left strong{color:var(--ink); display:block; font-family:var(--font-display); font-weight:600;}
+  .resume-row .r-left span{color:var(--ink-soft); font-size:13.5px; font-weight:500;}
+  .resume-row .r-right{color:var(--ink-soft); font-size:13px; font-weight:700; white-space:nowrap; text-align:right;}
+  .resume-section ul{margin-top:6px;}
+  .resume-section li{color:var(--ink-soft); font-size:14px; padding-left:18px; position:relative; margin-bottom:6px; font-weight:500;}
+  .resume-section li::before{content:"●"; position:absolute; left:0; color:var(--teal); font-size:8px; top:6px;}
+  .skill-pills{display:flex; flex-wrap:wrap; gap:9px;}
+  .skill-pill{background:#fff; border:2px solid var(--ink); padding:7px 14px; border-radius:999px; font-size:13px; font-weight:600; color:var(--ink);}
+  .skill-pill:nth-child(4n+1){background:#FFE3DA;}
+  .skill-pill:nth-child(4n+2){background:#D9F6EF;}
+  .skill-pill:nth-child(4n+3){background:#FFF0CC;}
+  .skill-pill:nth-child(4n+4){background:#FDE3ED;}
+  .resume-cta{text-align:center; margin-top:34px;}
+
+  /* ---------- CONTACT ---------- */
+  #contact{background:var(--berry); color:#fff;}
+  #contact .eyebrow{background:rgba(255,255,255,.2); color:#fff;} #contact .eyebrow .dot{background:#fff;}
+  #contact .section-head h2{color:#fff;} #contact .section-head p{color:#FCE0EB;}
+  .contact-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:56px;}
+  .contact-info-list{display:flex; flex-direction:column; gap:18px; margin-top:8px;}
+  .contact-info-item{display:flex; gap:16px; align-items:center;}
+  .contact-icon{
+    width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.2); border:2.5px solid #fff;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff;
+  }
+  .contact-info-item div{font-size:14.5px;}
+  .contact-info-item strong{display:block; color:#fff; font-size:15.5px; margin-bottom:2px; font-family:var(--font-display); font-weight:600;}
+  .contact-info-item span{color:#FCE0EB; font-weight:500;}
+  .contact-form{display:flex; flex-direction:column; gap:16px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  label{font-size:13px; font-weight:700; margin-bottom:7px; display:block; color:#fff; font-family:var(--font-display);}
+  input, textarea{
+    width:100%; background:rgba(255,255,255,.16); border:2.5px solid rgba(255,255,255,.5); border-radius:14px;
+    padding:13px 16px; color:#fff; font-family:var(--font-body); font-size:14.5px; font-weight:500;
+  }
+  input::placeholder, textarea::placeholder{color:rgba(255,255,255,.65);}
+  input:focus, textarea:focus{border-color:#fff; outline:none; background:rgba(255,255,255,.22);}
+  textarea{resize:vertical; min-height:120px;}
+  .form-msg{font-size:14px; color:#fff; font-weight:700; display:none; align-items:center; gap:8px;}
+  .form-msg.show{display:flex;}
+
+  footer{background:var(--ink); padding:26px 0; text-align:center;}
+  footer p{color:#C9BBAB; font-size:13px; font-weight:600;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .hero-inner{grid-template-columns:1fr; text-align:left;}
+    .headshot-wrap{max-width:280px; margin-top:24px;}
+    .about-grid{grid-template-columns:1fr;}
+    .artifact-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links{position:fixed; top:66px; left:0; right:0; background:#fff; flex-direction:column; align-items:stretch;
+      padding:14px 20px; border-bottom:3px solid var(--ink); gap:2px; display:none;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:12px 14px; border-radius:12px;}
+    .nav-toggle{display:block;}
+    section{padding:72px 0;}
+    .wrap{padding:0 22px;}
+    .artifact-grid{grid-template-columns:1fr;}
+    .exp-top{flex-direction:column;}
+    .exp-meta{text-align:left;}
+    .form-row{grid-template-columns:1fr;}
+    .resume-doc{padding:28px 22px;}
+    .resume-row{flex-direction:column; gap:4px;}
+    .resume-row .r-right{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#home" class="brand">
+      <span class="blob">JL</span>
+      <span>Jaidon Lapuz<small>Public Health Specialist</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#speech">Elevator Speech</a>
+      <a href="#experience">Experience</a>
+      <a href="#artifacts">Artifacts</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="confetti" id="confetti"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <div class="hero-tag">👋 Available for Public Health Roles — Class of 2026</div>
+      <h1>Jaidon Lapuz<br><span class="wavy">Public Health Educator</span></h1>
+      <p class="headline">Community Health Specialist &amp; Active Transportation Safety Advocate</p>
+      <p class="sub">Candidate for Bachelor of Science in Public Health, California State University, Long Beach (Class of 2026)</p>
+      <div class="hero-actions">
+        <a href="#artifacts" class="btn btn-primary">View Artifacts →</a>
+        <a href="Jaidon_Lapuz_resume%20(2).pdf" download class="btn btn-ghost">Download Resume</a>
+      </div>
+    </div>
+    <div class="headshot-wrap">
+      <div class="headshot">
+        <img src="unnamed.jpg" alt="Jaidon Lapuz" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="badge-float b1">🎓 CSULB '26</div>
+      <div class="badge-float b2">✅ NCHEC-Aligned</div>
+    </div>
+  </div>
+</section>
+<svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#FFFFFF" d="M0,32 C240,60 480,0 720,20 C960,40 1200,60 1440,24 L1440,60 L0,60 Z"></path></svg>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>About</div>
+      <h2>Grounded in equity, driven by evidence</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Dedicated public health student at California State University, Long Beach, specializing in Community Health Education. Driven by a passion for health equity, active transportation safety, youth mentorship, and chronic disease prevention. Built a strong foundation in epidemiology, public health biology, program evaluation, and community health promotion planning.</p>
+
+        <div class="philosophy">
+          <h4>💡 Personal Philosophy of Public Health</h4>
+          <p>"Health is a fundamental right, shaped largely by the environments in which people live, learn, work, and play. Effective community health education requires actively removing structural barriers, building authentic community trust, and equipping individuals with practical skills to make safe, healthy choices. I strive to advocate for health equity, empower youth, and foster safe, accessible environments."</p>
+        </div>
+      </div>
+      <div class="values">
+        <div class="value-card">
+          <span class="value-num">1</span>
+          <div><h4>Community-Centered Engagement</h4><p>Building trust and co-designing solutions with the people most affected.</p></div>
+        </div>
+        <div class="value-card">
+          <span class="value-num">2</span>
+          <div><h4>Evidence-Based Curriculum Design</h4><p>Grounding every lesson plan and intervention in data and best practice.</p></div>
+        </div>
+        <div class="value-card">
+          <span class="value-num">3</span>
+          <div><h4>Health Equity &amp; Advocacy</h4><p>Removing structural barriers so every community can access safe, healthy choices.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELEVATOR SPEECH -->
+<section id="speech">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Elevator Speech</div>
+      <h2>60 seconds on who I am and where I'm headed</h2>
+      <p>Press play to hear a short introduction, or read the full transcript below.</p>
+    </div>
+
+    <div class="player" id="player">
+      <button class="play-btn" id="playBtn" aria-label="Play elevator speech audio">
+        <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="waveform" id="waveform"></div>
+      <div class="player-time" id="playerTime">0:00 / 0:52</div>
+    </div>
+
+    <button class="transcript-toggle" id="transcriptToggle">
+      <span id="transcriptToggleLabel">Read full transcript</span> <span id="transcriptArrow">▾</span>
+    </button>
+    <div class="transcript" id="transcript">
+      <blockquote>
+        Hi, my name is Jaidon Lapuz, and I am graduating with my Bachelor of Science in Public Health from California State University, Long Beach. As a Community Health Intern with Walk and Roll Long Beach, I've gained hands-on experience conducting needs assessments, leading community outreach, and designing active transportation safety curricula for middle school students. My passion lies in health equity, chronic disease prevention, and youth empowerment. I strive to build healthier communities by removing structural barriers and delivering engaging, culturally tailored health education. I am eager to bring my skills in program planning, community engagement, and resource development to a dynamic public health organization.
+      </blockquote>
+    </div>
+  </div>
+</section>
+<svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#FFFFFF" d="M0,20 C240,50 480,60 720,36 C960,12 1200,10 1440,34 L1440,60 L0,60 Z"></path></svg>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Experience</div>
+      <h2>Where the work happens</h2>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-org">
+          <h3>Walk and Roll Long Beach</h3>
+          <div class="exp-role">Community Health Intern</div>
+        </div>
+        <div class="exp-meta">May 2026 – Present<br>Long Beach, CA</div>
+      </div>
+      <div class="route-list">
+        <div class="route-line"></div>
+        <div class="route-item">
+          <div class="route-marker">1</div>
+          <p><strong>Community needs assessments</strong> — analyzed 5 public health and transportation datasets to identify priority pedestrian and bicycle safety concerns.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-marker">2</div>
+          <p><strong>Environmental walk audits</strong> — executed 10 structured audits assessing pedestrian safety and accessibility barriers across Long Beach neighborhoods.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-marker">3</div>
+          <p><strong>Curriculum design</strong> — designed a 2-part Middle School Bike, E-Bike, and Pedestrian Safety curriculum for a lending kit loan program.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-marker">4</div>
+          <p><strong>Direct outreach</strong> — facilitated 20+ educational interactions and distributed active transportation materials to 100+ residents across events.</p>
+        </div>
+        <div class="route-item">
+          <div class="route-marker">5</div>
+          <p><strong>Program evaluation</strong> — collected and compiled 80+ participant survey responses to evaluate program effectiveness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTIFACTS -->
+<section id="artifacts">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Competency Artifacts</div>
+      <h2>Evidence of practice, mapped to NCHEC domains</h2>
+      <p>Each domain gets its own color — filter below to explore the scopes of work, curricula, and research behind each area of practice.</p>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="filter-chip active" data-filter="all">All Artifacts</button>
+      <button class="filter-chip" data-filter="I">Area I</button>
+      <button class="filter-chip" data-filter="II">Area II</button>
+      <button class="filter-chip" data-filter="III">Area III</button>
+      <button class="filter-chip" data-filter="IV">Area IV</button>
+      <button class="filter-chip" data-filter="V">Area V</button>
+      <button class="filter-chip" data-filter="VI">Area VI</button>
+      <button class="filter-chip" data-filter="VII">Area VII</button>
+      <button class="filter-chip" data-filter="VIII">Area VIII</button>
+      <button class="filter-chip" data-filter="Cultural">Cultural Competency</button>
+    </div>
+
+    <div class="artifact-grid" id="artifactGrid"></div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" id="modalContent">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+  </div>
+</div>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Resume</div>
+      <h2>Full résumé, at a glance</h2>
+    </div>
+
+    <div class="resume-doc">
+      <div class="resume-head">
+        <h3>Jaidon Lapuz</h3>
+        <p>Carson / Long Beach, CA &nbsp;·&nbsp; jaidonlapuz@gmail.com &nbsp;·&nbsp; (310) 427-5921</p>
+      </div>
+
+      <div class="resume-section">
+        <h4>Education</h4>
+        <div class="resume-row">
+          <div class="r-left"><strong>California State University, Long Beach</strong><span>Bachelor of Science in Public Health, Community Health Education</span></div>
+          <div class="r-right">Expected 2026</div>
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <h4>Experience</h4>
+        <div class="resume-row">
+          <div class="r-left"><strong>Community Health Intern</strong><span>Walk and Roll Long Beach</span></div>
+          <div class="r-right">May 2026 – Present<br>Long Beach, CA</div>
+        </div>
+        <ul>
+          <li>Conducted community needs assessments analyzing 5 public health and transportation datasets</li>
+          <li>Executed 10 structured environmental walk audits assessing pedestrian safety and accessibility barriers</li>
+          <li>Designed a 2-part Middle School Bike, E-Bike, and Pedestrian Safety curriculum for a lending kit loan program</li>
+          <li>Facilitated 20+ direct educational interactions and distributed materials to 100+ residents across outreach events</li>
+          <li>Collected and compiled 80+ participant survey responses to evaluate program effectiveness</li>
+        </ul>
+      </div>
+
+      <div class="resume-section">
+        <h4>Core Competencies</h4>
+        <div class="skill-pills">
+          <span class="skill-pill">Community Needs Assessment</span>
+          <span class="skill-pill">Curriculum Design</span>
+          <span class="skill-pill">Program Evaluation</span>
+          <span class="skill-pill">Epidemiology</span>
+          <span class="skill-pill">Public Health Biology</span>
+          <span class="skill-pill">Community Outreach</span>
+          <span class="skill-pill">Health Equity Advocacy</span>
+          <span class="skill-pill">Bilingual Program Design</span>
+        </div>
+      </div>
+
+      <div class="resume-cta">
+        <a href="Jaidon_Lapuz_resume%20(2).pdf" download class="btn btn-primary" id="resumeDownload">Download PDF Resume ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Contact</div>
+      <h2>Let's build healthier communities together</h2>
+      <p>Open to public health education, program coordination, and community health roles.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-list">
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><strong>Location</strong><span>Carson / Long Beach, CA</span></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+          </div>
+          <div><strong>Email</strong><span>jaidonlapuz@gmail.com</span></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div><strong>Phone</strong><span>(310) 427-5921</span></div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div>
+            <label for="fname">Name</label>
+            <input type="text" id="fname" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="femail">Email</label>
+            <input type="email" id="femail" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div>
+          <label for="fsubject">Subject</label>
+          <input type="text" id="fsubject" placeholder="What's this about?" required>
+        </div>
+        <div>
+          <label for="fmessage">Message</label>
+          <textarea id="fmessage" placeholder="Write your message..." required></textarea>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+          <button type="submit" class="btn btn-primary" style="border-color:#fff; box-shadow:5px 5px 0 rgba(0,0,0,.2);">Send Message</button>
+          <span class="form-msg" id="formMsg">✓ Message sent — thank you for reaching out!</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Jaidon Lapuz — Public Health E-Portfolio · Built for the pursuit of healthier communities.</p>
+</footer>
+
+<script>
+// ---------- Confetti dots in hero ----------
+const confetti = document.getElementById('confetti');
+const confettiColors = ['#FF6B54','#0FA98F','#FFC53D','#F0508C','#3FA6E0'];
+for (let i = 0; i < 26; i++) {
+  const dot = document.createElement('span');
+  const size = 5 + Math.random() * 9;
+  dot.style.width = size + 'px';
+  dot.style.height = size + 'px';
+  dot.style.left = Math.random() * 100 + '%';
+  dot.style.top = Math.random() * 100 + '%';
+  dot.style.background = confettiColors[i % confettiColors.length];
+  confetti.appendChild(dot);
+}
+
+// ---------- Nav toggle ----------
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen);
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', false);
+}));
+
+// ---------- Waveform bars ----------
+const waveform = document.getElementById('waveform');
+const barCount = 60;
+let bars = [];
+for (let i = 0; i < barCount; i++) {
+  const bar = document.createElement('span');
+  const h = 8 + Math.round(Math.sin(i/3) * 8 + Math.random()*14);
+  bar.style.height = Math.max(6, h) + 'px';
+  waveform.appendChild(bar);
+  bars.push(bar);
+}
+
+// ---------- Fake audio player ----------
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+const player = document.getElementById('player');
+const playerTime = document.getElementById('playerTime');
+let playing = false, elapsed = 0, totalSec = 52, timer = null;
+
+function formatTime(s){ const m = Math.floor(s/60); const sec = String(s%60).padStart(2,'0'); return m + ':' + sec; }
+
+playBtn.addEventListener('click', () => {
+  playing = !playing;
+  if (playing) {
+    player.classList.add('playing');
+    playIcon.innerHTML = '<rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect>';
+    timer = setInterval(() => {
+      elapsed++;
+      if (elapsed >= totalSec) { elapsed = 0; playing = false; player.classList.remove('playing');
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; clearInterval(timer); }
+      playerTime.textContent = formatTime(elapsed) + ' / 0:52';
+      const activeCount = Math.round((elapsed/totalSec) * barCount);
+      bars.forEach((b, i) => b.style.opacity = i < activeCount ? '1' : '.45');
+    }, 1000);
+  } else {
+    player.classList.remove('playing');
+    playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    clearInterval(timer);
+  }
+});
+
+// ---------- Transcript toggle ----------
+const transcriptToggle = document.getElementById('transcriptToggle');
+const transcript = document.getElementById('transcript');
+const transcriptArrow = document.getElementById('transcriptArrow');
+const transcriptLabel = document.getElementById('transcriptToggleLabel');
+transcriptToggle.addEventListener('click', () => {
+  const open = transcript.classList.toggle('open');
+  transcriptArrow.textContent = open ? '▴' : '▾';
+  transcriptLabel.textContent = open ? 'Hide transcript' : 'Read full transcript';
+});
+
+// ---------- Artifacts data (each domain has its own color) ----------
+const domainColors = { I:'#FF6B54', II:'#0FA98F', III:'#FFC53D', IV:'#F0508C', V:'#3FA6E0', VI:'#FF6B54', VII:'#0FA98F', VIII:'#F0508C', Cultural:'#FFC53D' };
+const artifacts = [
+  { domain: 'I', num: '01', badge: 'NCHEC Area I', title: 'Internship Community Needs & Data Assessment Scope of Work',
+    desc: 'Analysis of secondary datasets, environmental walk audits, and survey feedback evaluating pedestrian and bicycle safety needs in Long Beach.',
+    reflection: 'Demonstrates my ability to identify priority populations and gather both quantitative and qualitative environmental data to inform community-level health education strategies.',
+    pdfs: [{ label: 'Scope of Work', file: 'scope of work-1.pdf' }] },
+  { domain: 'II', num: '02', badge: 'NCHEC Area II', title: 'Middle School Bike, E-Bike & Pedestrian Safety Lesson Plan',
+    desc: 'Two-part interactive curriculum featuring classroom instruction and an outdoor Bike Rodeo designed for 6th–8th grade students.',
+    reflection: 'Demonstrates competency in designing age-appropriate, objective-driven educational programs aligning learning activities with specific safety behavior outcomes.',
+    pdfs: [{ label: 'Lesson Plan', file: 'Draft Lesson Plan (1).pdf' }] },
+  { domain: 'III', num: '03', badge: 'NCHEC Area III', title: 'Task E Instructor Notes & Curriculum Design',
+    desc: 'Teaching scripts, scenario-based learning station guides, and performance assessments developed for instructors delivering active transportation safety lessons.',
+    reflection: 'Highlights my ability to implement health education interventions effectively by creating standardized instructional tools and facilitator guides for program delivery.',
+    pdfs: [{ label: 'Instructor Notes', file: 'Task E Notes for Instructor.pdf' }] },
+  { domain: 'IV', num: '04', badge: 'NCHEC Area IV', title: 'Program Evaluation Guided Critique: "This Is Quitting" RCT',
+    desc: 'Guided evaluation critique analyzing a randomized clinical trial of a text-message vaping cessation program for adolescents.',
+    reflection: 'Illustrates research and evaluation skills in assessing program effectiveness, recognizing threats to internal and external validity, and interpreting quantitative evaluation findings.',
+    pdfs: [{ label: 'Article Critique', file: 'Final Article Critique.pdf' }] },
+  { domain: 'V', num: '05', badge: 'NCHEC Area V', title: 'Public Health Work Ethic, Teamwork, and Professional Reflections',
+    desc: 'Written reflections evaluating workflow management, initiative during low-attendance outreach events, and team collaboration.',
+    reflection: 'Shows my ability to manage project timelines, adapt implementation strategies under changing field conditions, and maintain professional work ethic.',
+    pdfs: [
+      { label: 'Work Ethic Reflection', file: 'ethic.pdf' },
+      { label: 'Teamwork Reflection', file: 'teamwork.pdf' },
+      { label: 'Soft Skills Training', file: 'Soft Skills Training - Initiative 2026.pdf' }
+    ] },
+  { domain: 'VI', num: '06', badge: 'NCHEC Area VI', title: 'Public Health Biology: Type 2 Diabetes Etiology & Prevention',
+    desc: 'In-depth research paper detailing biological mechanisms, risk factors, and three levels of prevention for Type 2 Diabetes Mellitus.',
+    reflection: 'Demonstrates my capacity to serve as an authoritative resource person by translating complex biological concepts into clear, actionable prevention information.',
+    pdfs: [{ label: 'Disease Prevention Paper', file: 'Lapuz_Jaidon.HSC250.DiseasePreventionPaper (1).pdf' }] },
+  { domain: 'VII', num: '07', badge: 'NCHEC Area VII', title: 'Pediatric Asthma in Schools: Educator Guidance & Advocacy',
+    desc: 'Educational overview translating clinical and environmental asthma data into actionable guidance and classroom accommodations for educators.',
+    reflection: 'Reflects my ability to advocate for vulnerable youth populations and communicate clear, evidence-based recommendations to non-health professionals in school settings.',
+    pdfs: [{ label: 'Childhood Illness Guide', file: 'Childhood illness.pdf' }] },
+  { domain: 'VIII', num: '08', badge: 'NCHEC Area VIII', title: 'Chronic Obstructive Pulmonary Disease (COPD) Case Study Analysis',
+    desc: 'Qualitative public health analysis assessing ethical, environmental, emotional, and social self-management factors in an older adult with chronic illness.',
+    reflection: 'Demonstrates professional understanding of holistic care and the ethical responsibility to consider social determinants of health in community practice.',
+    pdfs: [{ label: 'Case Study', file: 'Jaidon Lapuz Case study Assignment (1).pdf' }] },
+  { domain: 'Cultural', num: '★', badge: 'Cultural Competency / NCHEC Area II', title: 'Culturally Tailored Diabetes Prevention Interventions Among Filipino American Adults (Kalusugan sa Komunidad)',
+    desc: 'A 12-week culturally adapted lifestyle intervention proposal featuring bilingual Tagalog/English materials, modified traditional diets, and faith-based community networks.',
+    reflection: 'Demonstrates capability to design culturally congruent health education interventions by integrating bilingual materials, adapting traditional dietary habits, and leveraging collectivist family structures.',
+    pdfs: [{ label: 'Intervention Proposal', file: 'Culturally Tailored Diabetes Prevention Interventions Among Filipino American Adults.pdf' }] }
+];
+
+const grid = document.getElementById('artifactGrid');
+function renderArtifacts(filter) {
+  grid.innerHTML = '';
+  artifacts
+    .filter(a => filter === 'all' || a.domain === filter)
+    .forEach((a) => {
+      const card = document.createElement('div');
+      card.className = 'artifact-card';
+      card.style.setProperty('--card-color', domainColors[a.domain]);
+      const quickPdfBtn = a.pdfs.length === 1
+        ? `<button class="link-btn pdf">⬇ PDF</button>`
+        : `<button class="link-btn pdf">⬇ ${a.pdfs.length} Files</button>`;
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="domain-badge">${a.badge}</span>
+          <span class="card-domain-num">${a.num}</span>
+        </div>
+        <h3>${a.title}</h3>
+        <p class="desc">${a.desc}</p>
+        <div class="card-actions">
+          <button class="link-btn view-reflection">View reflection →</button>
+          ${quickPdfBtn}
+        </div>
+      `;
+      card.querySelector('.view-reflection').addEventListener('click', () => openModal(a));
+      card.querySelector('.pdf').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (a.pdfs.length === 1) { window.open(encodeURI(a.pdfs[0].file), '_blank'); }
+        else { openModal(a); }
+      });
+      card.addEventListener('click', (e) => { if (!e.target.classList.contains('pdf')) openModal(a); });
+      grid.appendChild(card);
+    });
+}
+renderArtifacts('all');
+
+// ---------- Filters ----------
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderArtifacts(chip.dataset.filter);
+  });
+});
+
+// ---------- Modal ----------
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalContent = document.getElementById('modalContent');
+function openModal(a) {
+  modalContent.style.setProperty('--card-color', domainColors[a.domain]);
+  const pdfButtons = a.pdfs.map(p =>
+    `<a class="btn btn-primary" href="${encodeURI(p.file)}" target="_blank" rel="noopener">${a.pdfs.length > 1 ? p.label : 'Download PDF'} ↓</a>`
+  ).join('');
+  modalContent.innerHTML = `
+    <button class="modal-close" id="modalClose2" aria-label="Close">✕</button>
+    <span class="domain-badge">${a.badge}</span>
+    <h3>${a.title}</h3>
+    <p class="desc">${a.desc}</p>
+    <div class="reflection-box">
+      <h4>Reflection</h4>
+      <p>"${a.reflection}"</p>
+    </div>
+    <div class="modal-actions" style="flex-wrap:wrap;">
+      ${pdfButtons}
+      <button class="btn btn-ghost" id="modalCloseBtn2">Close</button>
+    </div>
+  `;
+  modalBackdrop.classList.add('open');
+  document.getElementById('modalClose2').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn2').addEventListener('click', closeModal);
+}
+function closeModal(){ modalBackdrop.classList.remove('open'); }
+modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// ---------- Contact form ----------
+const contactForm = document.getElementById('contactForm');
+const formMsg = document.getElementById('formMsg');
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  formMsg.classList.add('show');
+  contactForm.reset();
+  setTimeout(() => formMsg.classList.remove('show'), 5000);
+});
+</script>
+</body>
+</html>
