@@ -695,45 +695,18 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   navToggle.setAttribute('aria-expanded', false);
 }));
 
-// ---------- Waveform bars ----------
-const waveform = document.getElementById('waveform');
-const barCount = 60;
-let bars = [];
-for (let i = 0; i < barCount; i++) {
-  const bar = document.createElement('span');
-  const h = 8 + Math.round(Math.sin(i/3) * 8 + Math.random()*14);
-  bar.style.height = Math.max(6, h) + 'px';
-  waveform.appendChild(bar);
-  bars.push(bar);
-}
+// ---------- Transcript toggle ----------
+const transcriptToggle = document.getElementById('transcriptToggle');
+const transcript = document.getElementById('transcript');
+const transcriptArrow = document.getElementById('transcriptArrow');
+const transcriptLabel = document.getElementById('transcriptToggleLabel');
 
-// ---------- Fake audio player ----------
-const playBtn = document.getElementById('playBtn');
-const playIcon = document.getElementById('playIcon');
-const player = document.getElementById('player');
-const playerTime = document.getElementById('playerTime');
-let playing = false, elapsed = 0, totalSec = 52, timer = null;
-
-function formatTime(s){ const m = Math.floor(s/60); const sec = String(s%60).padStart(2,'0'); return m + ':' + sec; }
-
-playBtn.addEventListener('click', () => {
-  playing = !playing;
-  if (playing) {
-    player.classList.add('playing');
-    playIcon.innerHTML = '<rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect>';
-    timer = setInterval(() => {
-      elapsed++;
-      if (elapsed >= totalSec) { elapsed = 0; playing = false; player.classList.remove('playing');
-        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; clearInterval(timer); }
-      playerTime.textContent = formatTime(elapsed) + ' / 0:52';
-      const activeCount = Math.round((elapsed/totalSec) * barCount);
-      bars.forEach((b, i) => b.style.opacity = i < activeCount ? '1' : '.45');
-    }, 1000);
-  } else {
-    player.classList.remove('playing');
-    playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-    clearInterval(timer);
-  }
+transcriptToggle.addEventListener('click', () => {
+  const open = transcript.classList.toggle('open');
+  transcriptArrow.textContent = open ? '▴' : '▾';
+  transcriptLabel.textContent = open
+    ? 'Hide transcript'
+    : 'Read full transcript';
 });
 
 // ---------- Transcript toggle ----------
