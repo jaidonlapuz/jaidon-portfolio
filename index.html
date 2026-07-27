@@ -178,16 +178,6 @@
     background:rgba(255,255,255,.14); border:3px solid rgba(255,255,255,.5); border-radius:24px;
     padding:26px 28px; display:flex; align-items:center; gap:22px; margin-bottom:34px;
   }
-  .play-btn{
-    width:58px; height:58px; border-radius:50%; background:var(--coral); border:3px solid var(--ink); cursor:pointer; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center; color:#fff; transition:transform .15s ease;
-    box-shadow:4px 4px 0 rgba(0,0,0,.25);
-  }
-  .play-btn:hover{transform:scale(1.07) rotate(-4deg);}
-  .waveform{flex:1; display:flex; align-items:center; gap:3px; height:40px; overflow:hidden;}
-  .waveform span{flex:1; background:rgba(255,255,255,.4); border-radius:3px; min-width:2px; transition:background .2s ease;}
-  .player.playing .waveform span{background:var(--sunny);}
-  .player-time{font-family:var(--font-display); font-size:13px; font-weight:600; color:#fff; flex-shrink:0;}
   .transcript-toggle{
     background:#fff; border:2.5px solid var(--ink); color:var(--ink); padding:11px 20px; border-radius:999px;
     font-family:var(--font-display); font-size:14.5px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
@@ -456,7 +446,7 @@
 
    <div class="player">
   <video controls width="100%" style="border-radius:20px;">
-    <source src="video1445460761 (1).mp4" type="video/quicktime">
+    <source src="video1445460761%20(1).mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -694,20 +684,6 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   navLinks.classList.remove('open');
   navToggle.setAttribute('aria-expanded', false);
 }));
-
-// ---------- Transcript toggle ----------
-const transcriptToggle = document.getElementById('transcriptToggle');
-const transcript = document.getElementById('transcript');
-const transcriptArrow = document.getElementById('transcriptArrow');
-const transcriptLabel = document.getElementById('transcriptToggleLabel');
-
-transcriptToggle.addEventListener('click', () => {
-  const open = transcript.classList.toggle('open');
-  transcriptArrow.textContent = open ? '▴' : '▾';
-  transcriptLabel.textContent = open
-    ? 'Hide transcript'
-    : 'Read full transcript';
-});
 
 // ---------- Transcript toggle ----------
 const transcriptToggle = document.getElementById('transcriptToggle');
